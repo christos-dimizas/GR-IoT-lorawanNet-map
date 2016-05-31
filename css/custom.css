@@ -1,0 +1,22 @@
+html,
+body {
+    height: 100%;
+}
+input {
+    width: 100%;
+}
+
+.back {
+    background: url(../images/IMG_1042.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+.display-block{
+    display: block;
+}
+
+.margin-top-15{
+    margin-top: 15px;
+}
