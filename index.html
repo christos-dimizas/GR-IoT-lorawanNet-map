@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="lorawanMapApp">
     <head lang="en">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <!-- HTML4 -->
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
@@ -11,46 +12,86 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Greece LoraWAN-Net</title>
 
-        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
+        <link href="styles/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="styles/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="styles/custom.css" rel="stylesheet">
     </head>
 
-    <body class="back">
+    <body class="back" ng-controller="LorawanNetMapCtrl">
         <div class="container ">
             <!-- ADDRESS MAP -->
             <div class="row">
-                <h1>Greece LoraWAN-Net</h1>
+                <h1 class="margin-50px">Greece LoraWAN-Net</h1>
+                <!-- MAP -->
                 <div class="col-xs-12 col-sm-8">
-                    <div id="addressGoogleMap" style="width:100%;height:550px;">
-                    </div>
+                    <!--<div id="addressGoogleMap" style="width:100%;height:550px;"></div>-->
+                    <input id="pac-input" class="controls" type="text" ng-model="userDetails.address" ng-change="id=pac-input"
+                           placeholder="Enter a location">
+                    <!--<div id="type-selector" class="controls">-->
+                        <!--<input type="radio" name="type" id="changetype-all" checked="checked">-->
+                        <!--<label for="changetype-all">All</label>-->
+
+                        <!--<input type="radio" name="type" id="changetype-establishment">-->
+                        <!--<label for="changetype-establishment">Establishments</label>-->
+
+                        <!--<input type="radio" name="type" id="changetype-address">-->
+                        <!--<label for="changetype-address">Addresses</label>-->
+
+                        <!--<input type="radio" name="type" id="changetype-geocode">-->
+                        <!--<label for="changetype-geocode">Geocodes</label>-->
+                    <!--</div>-->
+                    <div id="map" style="width:100%;height:550px;"></div>
                 </div>
+                <!-- FORM -->
                 <div class="col-xs-12 col-sm-3">
-                    <form method="post">
+                    <form id="infoForm" name="userSubmit" ng-submit="userDetailsSubmit()">
+
+                        <!-- USERNAME -->
                         <div>
-                            <label class="display-block" for="nickname">User nickname:</label>
-                            <input id="nickname" name="nickname" type="text">
+                            <label class="display-block" for="nickname">Username:</label>
+                            <input id="nickname" name="nickname" type="text" ng-model="userDetails.nickname" required>
                         </div>
 
+                        <!-- ADDRESS -->
                         <div>
-                            <label class="display-block" for="address">User address:</label>
-                            <input id="address" name="address" type="text">
+                            <label class="display-block" for="address">User address (in order to create a network possible distribution):</label>
+                            <input id="address" name="address" type="text" ng-model="userDetails.address" required>
                         </div>
 
+                        <!-- NODE DETAILS -->
                         <div>
-                            <label class="display-block" for="sdv">User nickname:</label>
-                            <input id="sdv" name="nickname" type="text">
+                            <label class="display-block" for="node">Node description (if there is one):</label>
+                            <input id="node" name="node" type="text" ng-model="userDetails.nodeDetails">
                         </div>
 
+                        <!-- GATEWAY DETAILS -->
+                        <div>
+                            <label class="display-block" for="gateway">Gateway description (if there is one):</label>
+                            <input id="gateway" name="gateway" type="text" ng-model="userDetails.gatewayDetails">
+                        </div>
+
+                        <!-- SUBMIT -->
                         <input class="margin-top-15" type="submit" value="Submit">
                     </form>
                 </div>
             </div>
+
         </div>
-        <script src="js/jquery/jquery.min.js"></script>
-        <script src="js/bootstrap/bootstrap.min.js"></script>
-        <script src="js/gMaps.js"></script>
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
-        <script src="js/lorawanMap.js"></script>
+
+
+        <script type="text/javascript" src="scripts/generalScripts/angular/angular.min.js"></script>
+        <script type="text/javascript" src="scripts/generalScripts/angular/angular-animate.min.js"></script>
+        <script type="text/javascript" src="scripts/app.js"></script>
+        <script type="text/javascript" src="scripts/controllers/LorawanNetMapCtrl.js"></script>
+        <!--<script type="text/javascript" src="scripts/services/mapsServices.js"></script>-->
+
+        <!--<script type="text/javascript" src="scripts/generalScripts/jquery/jquery.min.js"></script>-->
+        <!--<script type="text/javascript" src="scripts/generalScripts/bootstrap/bootstrap.min.js"></script>-->
+
+        <script type="text/javascript" src="scripts/mapScripts/gMaps.js"></script>
+        <!--<script type="text/javascript" src="scripts/mapScripts/lorawanMap.js"></script>-->
+        <script type="text/javascript" src="scripts/mapScripts/google-map.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMu5boEcE_keAHtDhtCgn_zyw3k5q8dFM&libraries=places&callback=initMap" async defer></script>
+
     </body>
 </html>
